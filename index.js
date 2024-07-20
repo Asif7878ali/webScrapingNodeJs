@@ -2,8 +2,10 @@ const puppeteer = require('puppeteer');
 
 (async function() {
      try {
+          const userid = process.env.ID;
+          const password = process.env.PASSWORD;
            // this line open Browser
-           const browserLaunch = await puppeteer.launch();
+           const browserLaunch = await puppeteer.launch({headless: false});
            console.log("Launch Browser");
       
           //this line open the tab and return the pages array
@@ -40,11 +42,12 @@ const puppeteer = require('puppeteer');
 
       await page.waitForSelector('input#your_name');
       console.log('input is find ID');
-      await page.type('input#your_name' , 'TEST001108R');
+      console.log(userid , password);
+      await page.type('input#your_name' , userid);
 
       await page.waitForSelector('input#your_pass');
       console.log('input is find Password');
-      await page.type('input#your_pass' , 'Test@123');
+      await page.type('input#your_pass' , password);
 
       await page.waitForSelector('input.h6.m-0.py-0.tab');
       console.log('Input is Find Capcha');
